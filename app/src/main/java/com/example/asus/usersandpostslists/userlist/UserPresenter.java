@@ -29,7 +29,7 @@ public class UserPresenter implements UserContract.Presenter {
             @Override
             public void onSuccess(List<User> users) {
                 view.hideProgressBar();
-                view.showUserList();
+                view.showUserList(users);
             }
 
             @Override

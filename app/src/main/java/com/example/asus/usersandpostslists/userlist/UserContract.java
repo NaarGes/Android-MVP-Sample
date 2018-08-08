@@ -10,7 +10,7 @@ public interface UserContract {
 
         void showProgressBar();
         void hideProgressBar();
-        void showUserList();
+        void showUserList(List<User> users);
         void showErrorMessage();
     }
 

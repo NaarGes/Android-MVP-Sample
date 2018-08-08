@@ -11,7 +11,7 @@ public interface PostContract {
         void showProgressBar();
         void hideProgressBar();
 
-        void showPostList();
+        void showPostList(List<Post> posts);
         void showErrorMessage();
     }
 

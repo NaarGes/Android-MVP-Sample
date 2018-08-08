@@ -27,7 +27,7 @@ public class PostPresenter implements PostContract.Presenter {
             @Override
             public void onSuccess(List<Post> posts) {
                 view.hideProgressBar();
-                view.showPostList();
+                view.showPostList(posts);
             }
 
             @Override

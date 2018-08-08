@@ -15,6 +15,9 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.example.asus.usersandpostslists.R;
+import com.example.asus.usersandpostslists.data.local.model.Post;
+
+import java.util.List;
 
 
 public class PostFragment extends Fragment implements PostContract.View {
@@ -67,9 +70,9 @@ public class PostFragment extends Fragment implements PostContract.View {
     }
 
     @Override
-    public void showPostList() {
+    public void showPostList(List<Post> posts) {
 
-        PostAdapter adapter = new PostAdapter(presenter.onLoadPost(getArguments().getInt("user id")));
+        PostAdapter adapter = new PostAdapter(posts);
         recyclerView.setAdapter(adapter);
     }
 

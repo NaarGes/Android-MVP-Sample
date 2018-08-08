@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import com.example.asus.usersandpostslists.MainActivity;
 import com.example.asus.usersandpostslists.R;
+import com.example.asus.usersandpostslists.data.local.model.User;
+
+import java.util.List;
 
 
 public class UserFragment extends Fragment implements UserContract.View {
@@ -68,9 +71,9 @@ public class UserFragment extends Fragment implements UserContract.View {
     }
 
     @Override
-    public void showUserList() {
+    public void showUserList(List<User> users) {
 
-        UserAdapter adapter = new UserAdapter(presenter.onLoadUser(), new OnUserClickListener() {
+        UserAdapter adapter = new UserAdapter(users, new OnUserClickListener() {
             @Override
             public void onUserClick(int userID) {
                 ((MainActivity) (getActivity())).goFromUserToPost(userID);
