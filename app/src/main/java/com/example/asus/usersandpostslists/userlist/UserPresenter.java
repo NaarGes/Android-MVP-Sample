@@ -1,7 +1,7 @@
 package com.example.asus.usersandpostslists.userlist;
 
 
-import com.example.asus.usersandpostslists.data.UserRepository;
+import com.example.asus.usersandpostslists.data.Repository;
 import com.example.asus.usersandpostslists.data.local.model.User;
 import com.example.asus.usersandpostslists.data.remote.ApiResult;
 
@@ -10,14 +10,13 @@ import java.util.List;
 
 public class UserPresenter implements UserContract.Presenter {
 
-
     private UserContract.View view;
-    private UserRepository userRepository;
+    private Repository repository;
 
     public UserPresenter(UserContract.View view) {
 
         this.view = view;
-        userRepository = new UserRepository();
+        repository = new Repository();
     }
 
     @Override
@@ -26,7 +25,7 @@ public class UserPresenter implements UserContract.Presenter {
         view.showProgressBar();
 
         List<User> users;
-        users = userRepository.getUsers(new ApiResult() {
+        users = repository.getUsers(new ApiResult.UserResults() {
             @Override
             public void onSuccess(List<User> users) {
                 view.hideProgressBar();

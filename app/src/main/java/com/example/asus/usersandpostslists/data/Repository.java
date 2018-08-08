@@ -1,5 +1,6 @@
 package com.example.asus.usersandpostslists.data;
 
+import com.example.asus.usersandpostslists.data.local.model.Post;
 import com.example.asus.usersandpostslists.data.local.model.User;
 import com.example.asus.usersandpostslists.data.remote.ApiClient;
 import com.example.asus.usersandpostslists.data.remote.ApiResult;
@@ -14,16 +15,20 @@ import retrofit2.Response;
 // repository is used for preparing data
 // it will decide to prepare online or offline
 
-public class UserRepository {
+public class Repository {
 
     private List<User> users;
+    private List<Post> posts;
+    private ApiService service;
 
-    public UserRepository() {
+
+    public Repository() {
+
+        service = ApiClient.getRetrofitInstance().create(ApiService.class);
     }
 
-    public List<User> getUsers(final ApiResult callback) {
+    public List<User> getUsers(final ApiResult.UserResults callback) {
 
-        ApiService service = ApiClient.getRetrofitInstance().create(ApiService.class);
         retrofit2.Call<List<User>> call = service.getAllUsers();
 
         call.enqueue(new Callback<List<User>>() {
@@ -45,5 +50,30 @@ public class UserRepository {
             }
         });
         return users;
+    }
+
+    public List<Post> getPosts(final ApiResult.PostResults callback, int userID) {
+
+        retrofit2.Call<List<Post>> call = service.getUserPosts(userID);
+
+        call.enqueue(new Callback<List<Post>>() {
+            @Override
+            public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
+
+                if(response.isSuccessful()) {
+                    posts = response.body();
+                    callback.onSuccess(posts);
+                } else {
+                    callback.onFail();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Post>> call, Throwable t) {
+
+                callback.onFail();
+            }
+        });
+        return posts;
     }
 }
