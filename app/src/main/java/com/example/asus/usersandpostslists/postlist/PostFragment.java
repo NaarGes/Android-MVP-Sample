@@ -29,10 +29,10 @@ public class PostFragment extends Fragment implements PostContract.View {
         return inflater.inflate(R.layout.fragment_post, container, false);
     }
 
-    public static PostFragment newInstance() {
+    public static PostFragment newInstance(int userId) {
         
         Bundle args = new Bundle();
-        
+        args.putInt("user id" ,userId);
         PostFragment fragment = new PostFragment();
         fragment.setArguments(args);
         return fragment;
@@ -50,7 +50,7 @@ public class PostFragment extends Fragment implements PostContract.View {
         RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
 
-        //presenter.onLoadPost(); // need user id
+        presenter.onLoadPost(getArguments().getInt("user id"));
 
     }
 
@@ -69,8 +69,8 @@ public class PostFragment extends Fragment implements PostContract.View {
     @Override
     public void showPostList() {
 
-        //PostAdapter adapter = new PostAdapter(presenter.onLoadPost());  // need user id
-        //recyclerView.setAdapter(adapter);
+        PostAdapter adapter = new PostAdapter(presenter.onLoadPost(getArguments().getInt("user id")));
+        recyclerView.setAdapter(adapter);
     }
 
     @Override

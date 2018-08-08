@@ -15,13 +15,15 @@ import java.util.List;
 public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> {
 
     private List<User> userList;
+    private OnUserClickListener listener;
 
     public UserAdapter() {
 
     }
 
-    public UserAdapter(List<User> dataList) {
+    public UserAdapter(List<User> dataList, OnUserClickListener listener) {
         this.userList = dataList;
+        this.listener = listener;
     }
 
     @NonNull
@@ -36,7 +38,14 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         holder.userName.setText(userList.get(position).getName());
         holder.userEmail.setText(userList.get(position).getEmail());
+        final int userID = userList.get(position).getId();
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                listener.onUserClick(userID);
+            }
+        });
     }
 
     @Override

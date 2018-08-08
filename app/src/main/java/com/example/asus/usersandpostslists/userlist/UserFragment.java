@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.example.asus.usersandpostslists.MainActivity;
 import com.example.asus.usersandpostslists.R;
 
 
@@ -69,9 +70,13 @@ public class UserFragment extends Fragment implements UserContract.View {
     @Override
     public void showUserList() {
 
-        UserAdapter adapter = new UserAdapter(presenter.onLoadUser());
+        UserAdapter adapter = new UserAdapter(presenter.onLoadUser(), new OnUserClickListener() {
+            @Override
+            public void onUserClick(int userID) {
+                ((MainActivity) (getActivity())).goFromUserToPost(userID);
+            }
+        });
         recyclerView.setAdapter(adapter);
-
     }
 
     @Override
