@@ -1,10 +1,8 @@
 package com.example.asus.usersandpostslists.userlist;
 
 
-import android.widget.ProgressBar;
-
 import com.example.asus.usersandpostslists.data.UserRepository;
-import com.example.asus.usersandpostslists.data.local.usermodel.User;
+import com.example.asus.usersandpostslists.data.local.model.User;
 import com.example.asus.usersandpostslists.data.remote.ApiResult;
 
 import java.util.List;

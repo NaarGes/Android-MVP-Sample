@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.asus.usersandpostslists.R;
-import com.example.asus.usersandpostslists.data.local.usermodel.User;
+import com.example.asus.usersandpostslists.data.local.model.User;
 
 import java.util.List;
 

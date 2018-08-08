@@ -1,6 +1,6 @@
 package com.example.asus.usersandpostslists.data;
 
-import com.example.asus.usersandpostslists.data.local.usermodel.User;
+import com.example.asus.usersandpostslists.data.local.model.User;
 import com.example.asus.usersandpostslists.data.remote.ApiClient;
 import com.example.asus.usersandpostslists.data.remote.ApiResult;
 import com.example.asus.usersandpostslists.data.remote.ApiService;
