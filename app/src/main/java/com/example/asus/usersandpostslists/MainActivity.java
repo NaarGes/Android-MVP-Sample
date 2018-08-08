@@ -15,7 +15,7 @@ public class MainActivity extends AppCompatActivity implements TransferBetweenFr
         setContentView(R.layout.activity_main);
 
         UserFragment userFragment = UserFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().addToBackStack("user fragment")
+        getSupportFragmentManager().beginTransaction()
                 .replace(R.id.main_container, userFragment).commit();
     }
 
