@@ -5,18 +5,9 @@ import com.example.asus.usersandpostslists.data.local.model.User;
 
 import java.util.List;
 
-public interface ApiResult {
+public interface ApiResult<T> {
 
-    interface UserResults {
-
-        void onSuccess(List<User> users);
-        void onFail();
-    }
-
-    interface PostResults {
-
-        void onSuccess(List<Post> posts);
-        void onFail();
-    }
+    void onSuccess(T result);
+    void onFail();
 
 }

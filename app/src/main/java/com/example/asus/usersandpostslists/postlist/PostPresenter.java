@@ -18,12 +18,11 @@ public class PostPresenter implements PostContract.Presenter {
     }
 
     @Override
-    public List<Post> onLoadPost(int userId) {
+    public void onLoadPost(int userId) {
 
         view.showProgressBar();
 
-        List<Post> posts;
-        posts = repository.getPosts(new ApiResult.PostResults() {
+        repository.getPosts(new ApiResult<List<Post>>() {
             @Override
             public void onSuccess(List<Post> posts) {
                 view.hideProgressBar();
@@ -35,7 +34,6 @@ public class PostPresenter implements PostContract.Presenter {
                 view.showErrorMessage();
             }
         }, userId);
-        return posts;
 
     }
 }

@@ -17,8 +17,6 @@ import retrofit2.Response;
 
 public class Repository {
 
-    private List<User> users;
-    private List<Post> posts;
     private ApiService service;
 
 
@@ -27,7 +25,7 @@ public class Repository {
         service = ApiClient.getRetrofitInstance().create(ApiService.class);
     }
 
-    public List<User> getUsers(final ApiResult.UserResults callback) {
+    public void getUsers(final ApiResult<List<User>> callback) {
 
         retrofit2.Call<List<User>> call = service.getAllUsers();
 
@@ -36,8 +34,7 @@ public class Repository {
             public void onResponse(Call<List<User>> call, Response<List<User>> response) {
 
                 if(response.isSuccessful()) {
-                    users = response.body();
-                    callback.onSuccess(users);
+                    callback.onSuccess(response.body());
                 } else {
                     callback.onFail();
                 }
@@ -49,10 +46,9 @@ public class Repository {
                 callback.onFail();
             }
         });
-        return users;
     }
 
-    public List<Post> getPosts(final ApiResult.PostResults callback, int userID) {
+    public void getPosts(final ApiResult<List<Post>> callback, int userID) {
 
         retrofit2.Call<List<Post>> call = service.getUserPosts(userID);
 
@@ -61,8 +57,7 @@ public class Repository {
             public void onResponse(Call<List<Post>> call, Response<List<Post>> response) {
 
                 if(response.isSuccessful()) {
-                    posts = response.body();
-                    callback.onSuccess(posts);
+                    callback.onSuccess(response.body());
                 } else {
                     callback.onFail();
                 }
@@ -74,6 +69,5 @@ public class Repository {
                 callback.onFail();
             }
         });
-        return posts;
     }
 }

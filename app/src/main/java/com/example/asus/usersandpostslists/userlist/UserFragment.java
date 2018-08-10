@@ -8,14 +8,15 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.Toast;
 
-import com.example.asus.usersandpostslists.MainActivity;
 import com.example.asus.usersandpostslists.R;
+import com.example.asus.usersandpostslists.TransferBetweenFragments;
 import com.example.asus.usersandpostslists.data.local.model.User;
 
 import java.util.List;
@@ -24,6 +25,7 @@ import java.util.List;
 public class UserFragment extends Fragment implements UserContract.View {
 
     private UserContract.Presenter presenter;
+    TransferBetweenFragments transferBetweenFragments;
     private RecyclerView recyclerView;
     private ProgressBar spinner;
 
@@ -50,7 +52,7 @@ public class UserFragment extends Fragment implements UserContract.View {
         spinner = view.findViewById(R.id.user_progress_bar);
         recyclerView = view.findViewById(R.id.user_recycler_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(view.getContext()));
-        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(getContext(), DividerItemDecoration.VERTICAL);
+        RecyclerView.ItemDecoration itemDecoration = new DividerItemDecoration(view.getContext(), DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(itemDecoration);
 
 
@@ -74,9 +76,13 @@ public class UserFragment extends Fragment implements UserContract.View {
     public void showUserList(List<User> users) {
 
         UserAdapter adapter = new UserAdapter(users, new OnUserClickListener() {
+
             @Override
             public void onUserClick(int userID) {
-                ((MainActivity) (getActivity())).goFromUserToPost(userID);
+                
+                Log.v("user id", ""+userID);
+                Log.v("tbf instance", ""+transferBetweenFragments); // this is null
+                transferBetweenFragments.goFromUserToPost(userID);
             }
         });
         recyclerView.setAdapter(adapter);

@@ -36,16 +36,8 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.userName.setText(userList.get(position).getName());
-        holder.userEmail.setText(userList.get(position).getEmail());
-        final int userID = userList.get(position).getId();
 
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                listener.onUserClick(userID);
-            }
-        });
+        holder.onBind(userList.get(position));
     }
 
     @Override
@@ -67,6 +59,20 @@ public class UserAdapter extends RecyclerView.Adapter<UserAdapter.MyViewHolder> 
             userName = itemView.findViewById(R.id.user_name);
             userEmail = itemView.findViewById(R.id.user_email);
 
+        }
+
+        public void onBind(User user) {
+
+            userName.setText(user.getName());
+            userEmail.setText(user.getEmail());
+            final int userID = user.getId();
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onUserClick(userID);
+                }
+            });
         }
     }
 }

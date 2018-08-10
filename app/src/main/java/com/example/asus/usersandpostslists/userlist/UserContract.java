@@ -16,6 +16,6 @@ public interface UserContract {
 
     interface Presenter {
 
-        List<User> onLoadUser();
+        void onLoadUser();
     }
 }

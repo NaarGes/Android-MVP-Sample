@@ -32,8 +32,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
     @Override
     public void onBindViewHolder(@NonNull PostViewHolder holder, int position) {
 
-        holder.title.setText(postList.get(position).getTitle());
-        holder.body.setText(postList.get(position).getBody());
+
     }
 
     @Override
@@ -52,6 +51,12 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
 
             title = itemView.findViewById(R.id.post_title_item);
             body = itemView.findViewById(R.id.post_body_item);
+        }
+
+        public void onBind(Post post) {
+
+            title.setText(post.getTitle());
+            body.setText(post.getBody());
         }
     }
 }

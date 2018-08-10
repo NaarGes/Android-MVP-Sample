@@ -17,6 +17,6 @@ public interface PostContract {
 
     interface Presenter {
 
-        List<Post> onLoadPost(int userId);
+        void onLoadPost(int userId);
     }
 }

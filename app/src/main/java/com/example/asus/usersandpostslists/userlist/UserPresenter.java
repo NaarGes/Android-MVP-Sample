@@ -20,16 +20,15 @@ public class UserPresenter implements UserContract.Presenter {
     }
 
     @Override
-    public List<User> onLoadUser() {
+    public void onLoadUser() {
 
         view.showProgressBar();
 
-        List<User> users;
-        users = repository.getUsers(new ApiResult.UserResults() {
+        repository.getUsers(new ApiResult<List<User>>() {
             @Override
-            public void onSuccess(List<User> users) {
+            public void onSuccess(List<User> result) {
                 view.hideProgressBar();
-                view.showUserList(users);
+                view.showUserList(result);
             }
 
             @Override
@@ -37,8 +36,6 @@ public class UserPresenter implements UserContract.Presenter {
                 view.showErrorMessage();
             }
         });
-        return users;
-
     }
 
 }
